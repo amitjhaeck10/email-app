@@ -1,0 +1,30 @@
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            clientId: github_clientId
+            clientSecret: github_secret
+  data:
+    cassandra:
+      keyspace-name: database
+      username: <username>
+      password: <password>
+      schema-action: recreate-drop-unused
+      request:
+        timeout: 10s
+      connection:
+        connect-timeout: 10s
+        init-query-timeout: 10s
+
+  datastax.astra:
+    secure-connect-bundle: secure-connect.zip
+
+  astra:
+    db:
+      id: <astra-db-id>
+      region: <astra-db-region>
+      keyspace: <astra-db-keyspace-name>
+      application:
+        token: <astra-app-token>
