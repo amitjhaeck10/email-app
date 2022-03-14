@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 @Configuration
 public class SecurityAdapter extends WebSecurityConfigurerAdapter {
@@ -16,7 +17,8 @@ public class SecurityAdapter extends WebSecurityConfigurerAdapter {
                        .permitAll().anyRequest().authenticated()).
                exceptionHandling(e->
                         e.authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)))
-               .csrf(c->c.disable()).logout(
+               .csrf(c->c.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
+               .logout(
                         lg->lg.logoutSuccessUrl("/").permitAll())
                .oauth2Login();
     }

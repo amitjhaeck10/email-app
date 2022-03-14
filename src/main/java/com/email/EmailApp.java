@@ -20,15 +20,14 @@ public class EmailApp {
 	}
 
 	@GetMapping("/user")
-	public String user(@AuthenticationPrincipal OAuth2User principal){
-		System.out.println("UserName: "+principal.getName());
-       return principal.getAttribute("name");
+	public String user(@AuthenticationPrincipal OAuth2User principal) {
+		System.out.println("UserName: " + principal.getName());
+		return principal.getAttribute("name");
 	}
 
 	@Bean
-	public CqlSessionBuilderCustomizer sessionBuilderCustomizer(DataStaxAstraProperties astraProperties){
+	public CqlSessionBuilderCustomizer sessionBuilderCustomizer(DataStaxAstraProperties astraProperties) {
 		Path bundle = astraProperties.getSecureConnectBundle().toPath();
-		return builder->builder.withCloudSecureConnectBundle(bundle);
+		return builder -> builder.withCloudSecureConnectBundle(bundle);
 	}
-
 }
